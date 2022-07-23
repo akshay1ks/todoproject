@@ -1,0 +1,24 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h1>Completed</h1>
+
+<ul>
+  {% for todo in todos %}
+
+    <li>
+      <a href="{% url 'viewTodo' todo.id %}">
+        {% if todo.important %}<b>{% endif %}
+          {{ todo.title }}
+        {% if todo.important %}</b>{% endif %}
+        {% if todo.memo %} -
+          {{ todo.memo|striptags|truncatechars:50 }}
+          {{ todo.lastModified|date:'M j Y H:i' }}
+        {% endif %}
+      </a>
+    </li>
+
+  {% endfor %}
+
+{% endblock %}
